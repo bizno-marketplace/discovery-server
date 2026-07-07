@@ -14,7 +14,12 @@ eureka:
     wait-time-in-ms-when-sync-empty: 0
 
 management:
+  server:
+    port: 9761
   endpoints:
     web:
       exposure:
-        include: health
+        include: health, info, prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
