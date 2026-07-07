@@ -1,0 +1,23 @@
+services:
+  discovery-server:
+    build: .
+    image: bizno/discovery-server:local
+    container_name: discovery-server
+    restart: unless-stopped
+    ports:
+      - "8761:8761"   # main port (Eureka dashboard/API)
+      - "9761:9761"   # management port (actuator, prometheus)
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:9761/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    networks:
+      - bizno-net
+
+networks:
+  bizno-net:
+    external: true
+    # Rede partilhada entre os 4 serviços + a stack de observability.
+    # Cria-a uma vez, se ainda não existir: docker network create bizno-net
