@@ -1,5 +1,6 @@
 server:
   port: 8761
+
 spring:
   application:
     name: discovery-server
@@ -23,3 +24,6 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
+
+loki:
+  url: ${LOKI_URL:http://localhost:3100}
