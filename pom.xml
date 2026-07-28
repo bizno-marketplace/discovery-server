@@ -25,16 +25,11 @@
 
     <properties>
         <java.version>25</java.version>
-        <commons.version>0.0.1</commons.version>
+        <commons.version>0.0.7</commons.version>
         <spring-cloud.version>2025.1.1</spring-cloud.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
@@ -44,12 +39,6 @@
             <groupId>com.biznopay</groupId>
             <artifactId>observability</artifactId>
             <version>${commons.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator-test</artifactId>
-            <scope>test</scope>
         </dependency>
     </dependencies>
     <dependencyManagement>
