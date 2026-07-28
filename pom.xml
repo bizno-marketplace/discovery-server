@@ -42,12 +42,6 @@
 
         <dependency>
             <groupId>com.biznopay</groupId>
-            <artifactId>outbox</artifactId>
-            <version>${commons.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.biznopay</groupId>
             <artifactId>observability</artifactId>
             <version>${commons.version}</version>
         </dependency>
