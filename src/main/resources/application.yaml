@@ -1,10 +1,8 @@
 server:
   port: 8761
-
 spring:
   application:
     name: discovery-server
-
 eureka:
   instance:
     hostname: ${DISCOVERY_SERVER_HOSTNAME:localhost}
@@ -13,7 +11,35 @@ eureka:
     fetch-registry: false
   server:
     wait-time-in-ms-when-sync-empty: 0
-
 management:
   server:
     port: 9761
+  endpoints:
+    web:
+      exposure:
+        include: health,refresh,info,prometheus
+  endpoint:
+    health:
+      show-details: always
+  tracing:
+    sampling:
+      probability: 1.0
+  otlp:
+    metrics:
+      export:
+        url: ${OTEL_EXPORTER_OTLP_METRICS_ENDPOINT:http://localhost:14318/v1/metrics}
+  opentelemetry:
+    tracing:
+      export:
+        otlp:
+          endpoint: ${OTEL_EXPORTER_OTLP_TRACES_ENDPOINT:http://localhost:14318/v1/traces}
+    logging:
+      export:
+        otlp:
+          endpoint: ${OTEL_EXPORTER_OTLP_LOGS_ENDPOINT:http://localhost:14318/v1/logs}
+      pattern:
+        correlation: "[${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+      include:
+        - application-name
+        - traceId
+        - spanId
